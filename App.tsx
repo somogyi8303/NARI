@@ -1,3 +1,4 @@
+
 /**
  * @license
  * SPDX-License-Identifier: Apache-2.0
@@ -77,7 +78,7 @@ const CONTENT = {
       team: 'The Team',
       ethics: 'Ethics & Impact',
       contact: 'Contact',
-      switchText: 'Magyar 🇭🇺',
+      switchText: 'Hungarian HUN',
       switchLink: 'index.html'
     },
     hero: {
@@ -101,7 +102,7 @@ const CONTENT = {
       roadmapPoints: [
         { bold: 'Phase 1: Agent Design & Ethics (6 months):', text: 'Custom AI development (no-code G-AI Studio), defining **Trigger Catalogs** based on clinical input.' },
         { bold: 'Phase 2: Pilot Study (N=20-30):', text: 'Mixed-Methods approach (quantitative usage logs, qualitative teacher/psychologist feedback, Wellbeing assessment).' },
-        { bold: 'Phase 3: Disssemination & Scaling:', text: 'International journal publications and policy recommendations for the European Child Welfare sector.' }
+        { bold: 'Phase 3: Dissemination & Scaling:', text: 'International journal publications and policy recommendations for the European Child Welfare sector.' }
       ]
     },
     team: {
@@ -134,8 +135,8 @@ const CONTENT = {
 };
 
 const App: React.FC = () => {
-  // Determine language based on URL
-  const isEnglish = typeof window !== 'undefined' && window.location.pathname.endsWith('index_en.html');
+  // Determine language based on URL, using includes for robustness
+  const isEnglish = typeof window !== 'undefined' && window.location.pathname.includes('index_en.html');
   const lang = isEnglish ? 'en' : 'hu';
   const t = CONTENT[lang];
 
