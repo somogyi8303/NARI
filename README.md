@@ -1,20 +1,99 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# 🤖💙 AI-CARE: Trauma-Informed AI Tutoring
 
-# Run and deploy your AI Studio app
+**Open-source educational support for children in child welfare**
 
-This contains everything you need to run your app locally.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Status: Alpha](https://img.shields.io/badge/Status-Alpha-orange)]()
 
-View your app in AI Studio: https://ai.studio/apps/drive/1yZ9-pmWKjzksoz_T7kLTOG0KGAfgn9Y1
+---
 
-## Run Locally
+## 🎯 Mission
 
-**Prerequisites:**  Node.js
+Every child deserves education that understands their story.
 
+AI-CARE provides trauma-informed, adaptive learning support for 
+children in child welfare - combining AI technology with human 
+oversight from psychologists and educators.
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+---
+
+## ✨ Features
+
+- **Trauma-Informed Design**: Trigger detection and avoidance
+- **Adaptive Learning**: Paces content to cognitive capacity
+- **Wellbeing Monitoring**: Continuous psychological safety checks
+- **Human Oversight**: Psychologist veto power and intervention
+- **Privacy-First**: GDPR compliant, child data protection
+- **Open Source**: Free for nonprofits and institutions
+
+---
+
+## 🏗️ Architecture
+```
+Child ↔ AI Tutor (Claude API)
+         ↓
+    Trigger Detection
+         ↓
+    Wellbeing Monitor
+         ↓
+    Alert → Psychologist (if needed)
+```
+
+---
+
+## 🚀 Status
+
+**Current Phase**: Prototype Development (2025)  
+**Pilot Study**: Planned 2027 (20-30 children)  
+**Institution**: Szabolcs-Szatmár-Bereg County Child Welfare Center
+
+---
+
+## 🤝 Team
+
+- **Peter Somogyi** - Technical Lead, NARI Founder
+- **Gyula Attila Bessenyei** - Practice Director (26 facilities)
+- **Gyula Balla** - Psychologist, Wellbeing Oversight
+
+Supported by: Claude (Anthropic), Gemini (Google), Copilot (Microsoft)
+
+---
+
+## 📚 Research
+
+Nash Alicia Research Institution (NARI)  
+Website: [ai-care.eu](https://ai-care.eu)
+
+---
+
+## 📄 License
+
+MIT License - Free for educational and nonprofit use
+
+---
+
+## 🙏 Acknowledgments
+
+This project is dedicated to the ~23,000 children in Hungarian 
+child welfare and vulnerable children worldwide.
+
+Technology with heart. Learning with care.
+```
+
+---
+
+## **LICENSE CHOICE:**
+```
+RECOMMENDATION: MIT License
+
+WHY?
+✅ Maximum freedom (anyone can use/modify)
+✅ Nonprofit-friendly (free for institutions)
+✅ Commercial allowed (BUT with attribution)
+✅ Simple & well-known
+
+ALTERNATIVE: Apache 2.0
+✅ Similar to MIT
+✅ + Patent protection (if needed)
+
+→ MIT = BEST for social impact! ✅
