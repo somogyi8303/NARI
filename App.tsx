@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
 */
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 // Content Definitions
 const CONTENT = {
@@ -15,7 +15,8 @@ const CONTENT = {
       team: 'Csapat',
       ethics: 'Etika & Hatás',
       contact: 'Kapcsolat',
-      switchText: 'English 🇬🇧'
+      switchText: 'English 🇬🇧',
+      switchLink: 'index_en.html'
     },
     hero: {
       titlePre: 'A',
@@ -76,7 +77,8 @@ const CONTENT = {
       team: 'The Team',
       ethics: 'Ethics & Impact',
       contact: 'Contact',
-      switchText: 'Magyar 🇭🇺'
+      switchText: 'Magyar 🇭🇺',
+      switchLink: 'index.html'
     },
     hero: {
       titlePre: 'The',
@@ -132,14 +134,10 @@ const CONTENT = {
 };
 
 const App: React.FC = () => {
-  const [lang, setLang] = useState<'hu' | 'en'>('hu');
-
+  // Determine language based on URL
+  const isEnglish = typeof window !== 'undefined' && window.location.pathname.endsWith('index_en.html');
+  const lang = isEnglish ? 'en' : 'hu';
   const t = CONTENT[lang];
-
-  const toggleLanguage = () => {
-    setLang(prev => prev === 'hu' ? 'en' : 'hu');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
 
   // Safe markdown-like bold parsing
   const renderText = (text: string) => {
@@ -167,7 +165,7 @@ const App: React.FC = () => {
                 <a href="#contact">{t.nav.contact}</a>
               </div>
               <div className="lang-switcher">
-                <button onClick={toggleLanguage}>{t.nav.switchText}</button>
+                <a href={t.nav.switchLink}>{t.nav.switchText}</a>
               </div>
             </div>
           </nav>

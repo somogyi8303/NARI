@@ -40,8 +40,7 @@ nav .lang-switcher {
   margin-left: 20px;
 }
 
-.lang-switcher button {
-  background: transparent;
+.lang-switcher a {
   color: white;
   text-decoration: none;
   padding: 5px 10px;
@@ -50,9 +49,10 @@ nav .lang-switcher {
   transition: background-color 0.3s;
   cursor: pointer;
   font-size: 1rem;
+  display: inline-block;
 }
 
-.lang-switcher button:hover {
+.lang-switcher a:hover {
   background-color: #4a82c4;
 }
 
