@@ -1,10 +1,9 @@
-
 /**
  * @license
  * SPDX-License-Identifier: Apache-2.0
 */
 
-import React from 'react';
+import React, { useState } from 'react';
 
 // Content Definitions
 const CONTENT = {
@@ -17,7 +16,6 @@ const CONTENT = {
       ethics: 'Etika & Hatás',
       contact: 'Kapcsolat',
       switchText: 'English 🇬🇧',
-      switchLink: 'index_en.html'
     },
     hero: {
       titlePre: 'A',
@@ -78,8 +76,7 @@ const CONTENT = {
       team: 'The Team',
       ethics: 'Ethics & Impact',
       contact: 'Contact',
-      switchText: 'Hungarian HUN',
-      switchLink: 'index.html'
+      switchText: 'Magyar 🇭🇺',
     },
     hero: {
       titlePre: 'The',
@@ -135,10 +132,15 @@ const CONTENT = {
 };
 
 const App: React.FC = () => {
-  // Determine language based on URL, using includes for robustness
-  const isEnglish = typeof window !== 'undefined' && window.location.pathname.includes('index_en.html');
-  const lang = isEnglish ? 'en' : 'hu';
+  const [lang, setLang] = useState<'hu' | 'en'>('hu');
+  
   const t = CONTENT[lang];
+
+  const handleLanguageSwitch = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setLang(prev => prev === 'hu' ? 'en' : 'hu');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   // Safe markdown-like bold parsing
   const renderText = (text: string) => {
@@ -166,7 +168,7 @@ const App: React.FC = () => {
                 <a href="#contact">{t.nav.contact}</a>
               </div>
               <div className="lang-switcher">
-                <a href={t.nav.switchLink}>{t.nav.switchText}</a>
+                <a href="#" onClick={handleLanguageSwitch}>{t.nav.switchText}</a>
               </div>
             </div>
           </nav>
@@ -243,7 +245,7 @@ const App: React.FC = () => {
           {t.ethics.sections.map((sec, i) => (
             <div key={i}>
               <h3>{sec.title}</h3>
-              <p style={sec.bold ? { fontWeight: 'bold' } : {}}>{renderText(sec.text)}</p>
+              <p style={(sec as any).bold ? { fontWeight: 'bold' } : {}}>{renderText(sec.text)}</p>
             </div>
           ))}
         </div>
