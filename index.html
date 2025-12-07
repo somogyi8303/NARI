@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Care-AI Projekt: Trauma-Érzékeny Tanulás</title>
+    <meta name="description" content="Úttörő etikus MI integráció a magyar gyermekvédelemben.">
+    
+    <style>
+        :root {
+            --primary-color: #004d99; /* Deep Blue */
+            --secondary-color: #f0f8ff; /* Light Background */
+            --text-color: #333;
+            --font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            background-color: white;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1em 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .lang-switcher {
+            margin-left: 20px;
+        }
+
+        .lang-switcher button {
+            background: transparent;
+            color: white;
+            padding: 5px 10px;
+            border: 1px solid white;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            cursor: pointer;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        
+        .lang-switcher button:hover {
+            background-color: #4a82c4;
+        }
+
+        nav .menu a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav .menu a:hover {
+            color: #d1d1d1;
+        }
+
+        h1, h2, h3 {
+            color: var(--primary-color);
+            line-height: 1.2;
+        }
+
+        /* HOME SECTION (HERO) */
+        #home {
+            background-color: var(--secondary-color);
+            padding: 6em 0;
+            text-align: center;
+        }
+
+        #home h1 {
+            font-size: 2.5em;
+            margin-bottom: 0.5em;
+            color: var(--text-color);
+        }
+
+        #home .highlight {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .metric-boxes {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 2em;
+            flex-wrap: wrap;
+        }
+
+        .metric-box {
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 1.5em;
+            width: 250px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            flex-grow: 1;
+            max-width: 300px;
+        }
+
+        .metric-box strong {
+            display: block;
+            font-size: 2em;
+            color: var(--primary-color);
+        }
+
+        /* GENERAL SECTION STYLING */
+        section {
+            padding: 4em 0;
+        }
+
+        #research, #ethics {
+            background-color: #f9f9f9;
+        }
+
+        /* TEAM SECTION */
+        #team .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 2em;
+        }
+
+        .team-member {
+            background-color: white;
+            padding: 1.5em;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .team-member img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1em;
+            border: 3px solid var(--primary-color);
+        }
+
+        .role-tag {
+            display: inline-block;
+            background-color: #ffcc00; /* Amber highlight */
+            color: var(--text-color);
+            padding: 0.3em 0.7em;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-top: 0.5em;
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2em 0;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1em;
+            }
+            nav .menu {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+            nav .menu a {
+                margin: 0 5px;
+            }
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.1",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.556.0",
+    "framer-motion": "https://aistudiocdn.com/framer-motion@^12.23.25",
+    "react/": "https://aistudiocdn.com/react@^19.2.1/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.31.0"
+  }
+}
+</script>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <span style="font-size: 1.5em; font-weight: bold;">care-ai.eu</span>
+                <div style="display: flex; align-items: center; flex-direction: column; md:flex-direction: row;">
+                    <div class="menu">
+                        <a href="#home" id="nav-home">Kezdőlap</a>
+                        <a href="#research" id="nav-research">Kutatás</a>
+                        <a href="#team" id="nav-team">Csapat</a>
+                        <a href="#ethics" id="nav-ethics">Etika & Hatás</a>
+                        <a href="#contact" id="nav-contact">Kapcsolat</a>
+                    </div>
+                    <div class="lang-switcher">
+                        <button onclick="toggleLanguage()" id="btn-lang">English 🇬🇧</button>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home">
+        <div class="container">
+            <h1 id="hero-title">A <span class="highlight">Care-AI Projekt</span>: Trauma-Érzékeny Tanulás Európa Legsebezhetőbb Gyermekeiért.</h1>
+            <p id="hero-desc">Úttörő etikus MI integráció a magyar gyermekvédelemben – a kognitív túlterhelés és az újra-traumatizáció csökkentése az állami gondozásban élő gyermekek számára.</p>
+            <a href="#research" id="hero-cta" style="display: inline-block; background-color: var(--primary-color); color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 20px; font-weight: bold;">Kutatási Menetrend</a>
+            
+            <div class="metric-boxes" id="hero-metrics">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <section id="research">
+        <div class="container">
+            <h2 id="res-title">Egyedülálló Kutatási Megközelítésünk</h2>
+            <p id="res-intro">A <strong>Care-AI Projekt</strong> a <strong>Nash-Alicia Kutatási Kezdeményezés (NARI)</strong> kiemelt projektje, amely az állami gondozásban élő fiatalok digitális szakadékának áthidalására fókuszál.</p>
+
+            <h3 id="res-prob-title">A Probléma és a Megoldás</h3>
+            <p id="res-prob-desc">Az összetett traumát átélt gyermekek kognitív túlterhelést tapasztalnak, ami gátolja a hagyományos tanulást. Megoldásunk egy egyedi, kontrollált MI ügynök tervezése, amely etikus LLM elveken (Claude/Gemini) alapul, adaptív támogatást nyújtva anélkül, hogy újra-traumatizálná őket.</p>
+
+            <h3 id="res-road-title">Kutatási Menetrend (Főbb Fázisok)</h3>
+            <ul id="res-roadmap">
+                <!-- Populated by JS -->
+            </ul>
+        </div>
+    </section>
+
+    <section id="team">
+        <div class="container">
+            <h2 id="team-title">A Multidiszciplináris NARI Csapat</h2>
+            <p id="team-desc" style="text-align: center; margin-bottom: 2em;">A tudományos szigor, a gyakorlati gyermekvédelmi szakértelem, a technológiai fejlesztés és a klinikai pszichológia egyedülálló kombinációja.</p>
+            
+            <div class="team-grid" id="team-grid">
+                <!-- Populated by JS -->
+            </div>
+            <p id="team-footer" style="text-align: center; margin-top: 2em; font-style: italic;">A Nash-Alicia Kutatási Kezdeményezést (NARI) Dr. John Forbes Nash és Alicia Nash kitartása inspirálja.</p>
+        </div>
+    </section>
+
+    <section id="ethics">
+        <div class="container">
+            <h2 id="ethics-title">Etika, Biztonság és Globális Hatás</h2>
+            <div id="ethics-content">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <p><strong id="footer-project">Care-AI Projekt</strong> | <span id="footer-sub">A Nash-Alicia Kutatási Kezdeményezés (NARI) projektje.</span></p>
+            <p id="footer-contact">Kapcsolat: research [kukac] care-ai.eu (Helyőrző E-mail)</p>
+            <p id="footer-rights">&copy; 2025 Care-AI Projekt. Minden jog fenntartva.</p>
+        </div>
+    </footer>
+
+    <script>
+        const translations = {
+            hu: {
+                nav: { home: 'Kezdőlap', research: 'Kutatás', team: 'Csapat', ethics: 'Etika & Hatás', contact: 'Kapcsolat', btn: 'English 🇬🇧' },
+                hero: { 
+                    title: 'A <span class="highlight">Care-AI Projekt</span>: Trauma-Érzékeny Tanulás Európa Legsebezhetőbb Gyermekeiért.',
+                    desc: 'Úttörő etikus MI integráció a magyar gyermekvédelemben – a kognitív túlterhelés és az újra-traumatizáció csökkentése az állami gondozásban élő gyermekek számára.',
+                    cta: 'Kutatási Menetrend',
+                    metrics: [
+                        { val: '~23,000+', lbl: 'Érintett gyermek (Magyarország)' },
+                        { val: '3+', lbl: 'Fő szakterület (Tech, Pszicho, Pedagógia)' },
+                        { val: '26', lbl: 'Intézményi partner (Hálózat)' }
+                    ]
+                },
+                research: {
+                    title: 'Egyedülálló Kutatási Megközelítésünk',
+                    intro: 'A <strong>Care-AI Projekt</strong> a <strong>Nash-Alicia Kutatási Kezdeményezés (NARI)</strong> kiemelt projektje, amely az állami gondozásban élő fiatalok digitális szakadékának áthidalására fókuszál.',
+                    probTitle: 'A Probléma és a Megoldás',
+                    probDesc: 'Az összetett traumát átélt gyermekek kognitív túlterhelést tapasztalnak, ami gátolja a hagyományos tanulást. Megoldásunk egy egyedi, kontrollált MI ügynök tervezése, amely etikus LLM elveken (Claude/Gemini) alapul, adaptív támogatást nyújtva anélkül, hogy újra-traumatizálná őket.',
+                    roadTitle: 'Kutatási Menetrend (Főbb Fázisok)',
+                    roadmap: [
+                        { b: '1. Fázis: Ügynök Tervezés & Etika (6 Hónap):', t: 'Egyedi MI fejlesztés (no-code G-AI Studio), klinikai adatok alapján kidolgozott <strong>Trigger Katalógus</strong> meghatározása.' },
+                        { b: '2. Fázis: Pilot Tanulmány (N=20-30):', t: 'Vegyes módszertan (kvantitatív használati logok, kvalitatív tanári/pszichológusi visszajelzések, Jólét mérés).' },
+                        { b: '3. Fázis: Disszemináció & Skálázás:', t: 'Nemzetközi folyóirat publikációk és szakpolitikai javaslatok az európai gyermekvédelmi szektor számára.' }
+                    ]
+                },
+                team: {
+                    title: 'A Multidiszciplináris NARI Csapat',
+                    desc: 'A tudományos szigor, a gyakorlati gyermekvédelmi szakértelem, a technológiai fejlesztés és a klinikai pszichológia egyedülálló kombinációja.',
+                    footer: 'A Nash-Alicia Kutatási Kezdeményezést (NARI) Dr. John Forbes Nash és Alicia Nash kitartása inspirálja.',
+                    members: [
+                        { name: 'Somogyi Péter', role: 'Kezdeményezés Vezető / Tech Implementátor', tag: 'Tech & Projekt Koordináció', img: 'https://placehold.co/200x200/004d99/ffffff?text=SP' },
+                        { name: 'Balla Gyula', role: 'Klinikai & Etikai Vezető', tag: 'Trauma Pszichológia / Vétó Jog', img: 'https://placehold.co/200x200/004d99/ffffff?text=BG' },
+                        { name: 'Bessenyei Gyula Attila', role: 'Gyakorlati Partner / Igazgató', tag: '26 Telephely Hálózat / Gyermekvédelem', img: 'https://placehold.co/200x200/004d99/ffffff?text=BGA' },
+                        { name: 'Dr. habil. Horváth László', role: 'Akadémiai Témavezető', tag: 'ELTE MIOL Lab / Metodológia', img: 'https://placehold.co/200x200/004d99/ffffff?text=HL' },
+                        { name: 'Dr. Cseszregi Tamás', role: 'Infrastruktúra Koordinátor', tag: 'ELTE DOKK / Pályázati Háttér', img: 'https://placehold.co/200x200/004d99/ffffff?text=CT' }
+                    ]
+                },
+                ethics: {
+                    title: 'Etika, Biztonság és Globális Hatás',
+                    sections: [
+                        { h: 'Etika az Első: A Klinikai Biztonsági Protokoll', t: 'Elkötelezettségünk az <strong>újra-traumatizáció elkerülése</strong>. Az MI ügynök szigorú klinikai korlátozások mellett működik, folyamatosan figyelemmel kísérve pszichológusunk által. Az <strong>MI kifejezetten tiltott pszichológiai tanácsot adni</strong>, és be van programozva arra, hogy trauma-trigger aktiválódásakor emberi szakemberekhez forduljon.' },
+                        { h: 'Finanszírozás és Partnerség', t: 'Aktívan keresünk kezdő finanszírozást a pilot fázishoz az <strong>UNICEF Innovation Fund</strong>, az <strong>AI for Social Good Grants</strong> révén, és a <strong>Horizon Europe</strong> Cluster 2 célterületet célozzuk a skálázáshoz.' },
+                        { h: 'Felhívás Együttműködésre', t: 'Szívesen fogadunk nemzetközi akadémiai és intézményi partnereket, hogy csatlakozzanak hozzánk egy javaslat közös kidolgozásához, melynek célja e trauma-érzékeny megközelítés kiterjesztése egész Európára. Vegye fel velünk a kapcsolatot lent.', bold: true }
+                    ]
+                },
+                footer: {
+                    project: 'Care-AI Projekt',
+                    sub: 'A Nash-Alicia Kutatási Kezdeményezés (NARI) projektje.',
+                    contact: 'Kapcsolat: research [kukac] care-ai.eu (Helyőrző E-mail)',
+                    rights: '© 2025 Care-AI Projekt. Minden jog fenntartva.'
+                }
+            },
+            en: {
+                nav: { home: 'Home', research: 'Research', team: 'The Team', ethics: 'Ethics & Impact', contact: 'Contact', btn: 'Magyar 🇭🇺' },
+                hero: { 
+                    title: 'The <span class="highlight">Care-AI Project</span>: Trauma-Informed Learning for Europe\'s Most Vulnerable Children.',
+                    desc: 'Pioneering ethical AI integration in Hungarian child welfare – reducing cognitive load and re-traumatization for children in state care.',
+                    cta: 'Explore the Research Roadmap',
+                    metrics: [
+                        { val: '~23,000+', lbl: 'Children Impacted (Hungary)' },
+                        { val: '3+', lbl: 'Core Disciplines (Tech, Psycho, Pedagogy)' },
+                        { val: '26', lbl: 'Institutional Partners (Network)' }
+                    ]
+                },
+                research: {
+                    title: 'Our Unique Research Approach',
+                    intro: 'The <strong>Care-AI Project</strong> is the flagship initiative of the <strong>Nash-Alicia Research Initiative (NARI)</strong>, focused on bridging the digital divide for youth in state care.',
+                    probTitle: 'The Problem & Our Solution',
+                    probDesc: 'Children affected by complex trauma experience cognitive overload, which inhibits traditional learning. Our solution designs a custom, controlled AI agent built on ethical LLM principles (Claude/Gemini) to provide adaptive support without causing re-traumatization.',
+                    roadTitle: 'Research Roadmap (Key Phases)',
+                    roadmap: [
+                        { b: 'Phase 1: Agent Design & Ethics (6 months):', t: 'Custom AI development (no-code G-AI Studio), defining <strong>Trigger Catalogs</strong> based on clinical input.' },
+                        { b: 'Phase 2: Pilot Study (N=20-30):', t: 'Mixed-Methods approach (quantitative usage logs, qualitative teacher/psychologist feedback, Wellbeing assessment).' },
+                        { b: 'Phase 3: Dissemination & Scaling:', t: 'International journal publications and policy recommendations for the European Child Welfare sector.' }
+                    ]
+                },
+                team: {
+                    title: 'The Multidisciplinary NARI Team',
+                    desc: 'A unique combination of academic rigor, practical child welfare expertise, technological development, and clinical psychology.',
+                    footer: 'The Nash-Alicia Research Initiative (NARI) is inspired by the perseverance of Dr. John Forbes Nash and Alicia Nash.',
+                    members: [
+                        { name: 'Péter Somogyi', role: 'Initiative Lead / Tech Implementer', tag: 'Tech & Project Orchestration', img: 'https://placehold.co/200x200/004d99/ffffff?text=PS' },
+                        { name: 'Gyula Balla', role: 'Clinical & Ethical Lead', tag: 'Trauma Psychology / Veto Right', img: 'https://placehold.co/200x200/004d99/ffffff?text=GB' },
+                        { name: 'Gyula Bessenyei Attila', role: 'Practice Partner / Director', tag: '26 Site Network / Child Welfare', img: 'https://placehold.co/200x200/004d99/ffffff?text=GBA' },
+                        { name: 'Dr. habil. Horváth László', role: 'Academic Supervisor', tag: 'ELTE MIOL Lab / Methodology', img: 'https://placehold.co/200x200/004d99/ffffff?text=HL' },
+                        { name: 'Dr. Cseszregi Tamás', role: 'Infrastructure Coordinator', tag: 'ELTE DOKK / Grant Support', img: 'https://placehold.co/200x200/004d99/ffffff?text=CT' }
+                    ]
+                },
+                ethics: {
+                    title: 'Ethics, Safety, and Global Impact',
+                    sections: [
+                        { h: 'Ethics First: The Clinical Safety Protocol', t: 'Our commitment is <strong>non-re-traumatization</strong>. The AI agent operates under strict clinical constraints, continuously monitored by our psychologist, Gyula Balla. The <strong>AI is explicitly forbidden from giving psychological advice</strong> and is programmed to defer to human professionals upon activation of a trauma trigger.' },
+                        { h: 'Funding & Partnership', t: 'We are actively seeking seed funding for the pilot phase through <strong>UNICEF Innovation Fund</strong>, <strong>AI for Social Good Grants</strong>, and targeting the <strong>EU Horizon Europe</strong> Cluster 2 for scale-up.' },
+                        { h: 'Call for Collaboration', t: 'We welcome international academic and institutional partners to join us in co-developing a proposal to scale this trauma-informed approach across Europe. Contact us below.', bold: true }
+                    ]
+                },
+                footer: {
+                    project: 'The Care-AI Project',
+                    sub: 'A Nash-Alicia Research Initiative (NARI) project.',
+                    contact: 'Contact: research [at] care-ai.eu (Placeholder E-mail)',
+                    rights: '© 2025 Care-AI Project. All rights reserved.'
+                }
+            }
+        };
+
+        let currentLang = 'hu';
+
+        function render() {
+            const t = translations[currentLang];
+            
+            // Nav
+            document.getElementById('nav-home').textContent = t.nav.home;
+            document.getElementById('nav-research').textContent = t.nav.research;
+            document.getElementById('nav-team').textContent = t.nav.team;
+            document.getElementById('nav-ethics').textContent = t.nav.ethics;
+            document.getElementById('nav-contact').textContent = t.nav.contact;
+            document.getElementById('btn-lang').textContent = t.nav.btn;
+
+            // Hero
+            document.getElementById('hero-title').innerHTML = t.hero.title;
+            document.getElementById('hero-desc').textContent = t.hero.desc;
+            document.getElementById('hero-cta').textContent = t.hero.cta;
+            
+            // Hero Metrics
+            const metricsHtml = t.hero.metrics.map(m => `
+                <div class="metric-box">
+                    <strong>${m.val}</strong>
+                    <p>${m.lbl}</p>
+                </div>
+            `).join('');
+            document.getElementById('hero-metrics').innerHTML = metricsHtml;
+
+            // Research
+            document.getElementById('res-title').textContent = t.research.title;
+            document.getElementById('res-intro').innerHTML = t.research.intro;
+            document.getElementById('res-prob-title').textContent = t.research.probTitle;
+            document.getElementById('res-prob-desc').textContent = t.research.probDesc;
+            document.getElementById('res-road-title').textContent = t.research.roadTitle;
+
+            const roadmapHtml = t.research.roadmap.map(item => `
+                <li><strong>${item.b}</strong> ${item.t}</li>
+            `).join('');
+            document.getElementById('res-roadmap').innerHTML = roadmapHtml;
+
+            // Team
+            document.getElementById('team-title').textContent = t.team.title;
+            document.getElementById('team-desc').textContent = t.team.desc;
+            document.getElementById('team-footer').textContent = t.team.footer;
+
+            const teamHtml = t.team.members.map(m => `
+                <div class="team-member">
+                    <img src="${m.img}" alt="${m.name}">
+                    <h3>${m.name}</h3>
+                    <p><strong>${m.role}</strong></p>
+                    <span class="role-tag">${m.tag}</span>
+                </div>
+            `).join('');
+            document.getElementById('team-grid').innerHTML = teamHtml;
+
+            // Ethics
+            document.getElementById('ethics-title').textContent = t.ethics.title;
+            const ethicsHtml = t.ethics.sections.map(s => `
+                <div>
+                    <h3>${s.h}</h3>
+                    <p style="${s.bold ? 'font-weight:bold;' : ''}">${s.t}</p>
+                </div>
+            `).join('');
+            document.getElementById('ethics-content').innerHTML = ethicsHtml;
+
+            // Footer
+            document.getElementById('footer-project').textContent = t.footer.project;
+            document.getElementById('footer-sub').textContent = t.footer.sub;
+            document.getElementById('footer-contact').textContent = t.footer.contact;
+            document.getElementById('footer-rights').textContent = t.footer.rights;
+        }
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'hu' ? 'en' : 'hu';
+            render();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Initialize
+        render();
+
+    </script>
+
+</body>
+</html>
